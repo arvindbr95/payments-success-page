@@ -1,9 +1,43 @@
+import { useState } from "react";
 import "./App.css";
 import { Grid, Typography } from "@mui/material";
 import productImg from "./product-img.jpg";
 import { QRCodeSVG } from "qrcode.react";
+import { useWeb3Modal } from "@web3modal/react";
+import { Button } from "@mui/material";
+import { useAccount, useContractWrite } from "wagmi";
+import erc20abi from "./erc20abi.json";
 
 function App() {
+	const { open } = useWeb3Modal();
+	const { isConnected } = useAccount();
+	const [loading, setLoading] = useState(false);
+
+	const { write } = useContractWrite({
+		mode: "recklesslyUnprepared",
+		address: "0x45E5696F16D2BbbD17cAa483c8b4e8cF3Bf51208",
+		abi: erc20abi,
+		functionName: "transfer",
+		args: [
+			"0x6b419b3226c00c7fa0Aebe9b933A097a11F43C7d",
+			"100000000000000000",
+		],
+		onSuccess(data) {
+			console.log("Success", data);
+			window.alert(
+				"Payment successful, you will receive your order in 5 working days."
+			);
+		},
+		onError(error) {
+			console.log("Error", error);
+		},
+	});
+
+	const handlePayment = async () => {
+		setLoading(true);
+		write();
+	};
+
 	return (
 		<div className="App">
 			<Grid
@@ -211,7 +245,7 @@ function App() {
 								marginBottom: 48,
 							}}
 						>
-							Make payment to this address
+							Make payment to this address:
 						</Typography>
 					</Grid>
 					<Grid
@@ -246,7 +280,7 @@ function App() {
 							0x6b419b3226c00c7fa0Aebe9b933A097a11F43C7d
 						</Typography>
 					</Grid>
-                    <Grid
+					<Grid
 						style={{
 							width: "100%",
 							display: "flex",
@@ -256,11 +290,48 @@ function App() {
 						<Typography
 							style={{
 								fontSize: 16,
-								marginBottom: 48,
+								marginBottom: 16,
 							}}
 						>
-							Alternatively, connect your wallet to complete the payment
+							Alternatively, pay using your browser wallet:
 						</Typography>
+					</Grid>
+					<Grid
+						style={{
+							display: "flex",
+							justifyContent: "center",
+						}}
+					>
+						{isConnected ? (
+							<Button
+								disabled={loading}
+								variant="contained"
+								onClick={handlePayment}
+								style={{
+									textTransform: "none",
+									fontSize: 16,
+									fontWeight: 600,
+									padding: "8px 16px",
+									minWidth: 200,
+								}}
+							>
+								Pay APE 8.2908
+							</Button>
+						) : (
+							<Button
+								variant="contained"
+								onClick={open}
+								style={{
+									textTransform: "none",
+									fontSize: 16,
+									fontWeight: 600,
+									padding: "8px 16px",
+									minWidth: 200,
+								}}
+							>
+								Connect your wallet
+							</Button>
+						)}
 					</Grid>
 				</Grid>
 			</Grid>
