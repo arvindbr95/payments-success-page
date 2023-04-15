@@ -1,7 +1,7 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { Grid, Typography } from "@mui/material";
 import productImg from "./product-img.jpg";
+import { QRCodeSVG } from "qrcode.react";
 
 function App() {
 	return (
@@ -77,7 +77,7 @@ function App() {
 								$30.00
 							</Typography>
 						</Grid>
-                        <Grid
+						<Grid
 							style={{
 								display: "flex",
 								alignItems: "center",
@@ -103,7 +103,7 @@ function App() {
 								$5.00
 							</Typography>
 						</Grid>
-                        <Grid
+						<Grid
 							style={{
 								display: "flex",
 								alignItems: "center",
@@ -129,7 +129,7 @@ function App() {
 								$2.40
 							</Typography>
 						</Grid>
-                        <Grid
+						<Grid
 							style={{
 								display: "flex",
 								alignItems: "center",
@@ -141,7 +141,7 @@ function App() {
 								style={{
 									fontWeight: 600,
 									flexGrow: 1,
-                                    fontSize: 16
+									fontSize: 16,
 								}}
 							>
 								Total
@@ -151,13 +151,13 @@ function App() {
 									marginLeft: 16,
 									fontWeight: 600,
 									textAlign: "right",
-                                    fontSize: 16
+									fontSize: 16,
 								}}
 							>
 								$37.40
 							</Typography>
 						</Grid>
-                        <Grid
+						<Grid
 							style={{
 								display: "flex",
 								alignItems: "center",
@@ -169,7 +169,7 @@ function App() {
 								style={{
 									fontWeight: 600,
 									flexGrow: 1,
-                                    fontSize: 18
+									fontSize: 18,
 								}}
 							>
 								Total in ApeCoin
@@ -179,7 +179,7 @@ function App() {
 									marginLeft: 16,
 									fontWeight: 600,
 									textAlign: "right",
-                                    fontSize: 18
+									fontSize: 18,
 								}}
 							>
 								APE 8.2908
@@ -195,10 +195,73 @@ function App() {
 						padding: "56px 120px 56px 56px",
 						minHeight: "100vh",
 						display: "flex",
-						justifyContent: "center",
+						flexDirection: "column",
 					}}
 				>
-					there
+					<Grid
+						style={{
+							width: "100%",
+							display: "flex",
+							// justifyContent: "center",
+						}}
+					>
+						<Typography
+							style={{
+								fontSize: 16,
+								marginBottom: 48,
+							}}
+						>
+							Make payment to this address
+						</Typography>
+					</Grid>
+					<Grid
+						style={{
+							width: "100%",
+							display: "flex",
+							justifyContent: "center",
+							marginBottom: 8,
+						}}
+					>
+						<QRCodeSVG
+							value={"0x40562Cf2E90f23b3969d782B5c8f134A77069b49"}
+							style={{ marginBottom: "8px" }}
+						/>
+					</Grid>
+					<Grid
+						style={{
+							width: "100%",
+							display: "flex",
+							justifyContent: "center",
+						}}
+					>
+						<Typography
+							style={{
+								fontSize: 14,
+								backgroundColor: "#e5e5e5",
+								borderRadius: "8px",
+								marginBottom: 64,
+								padding: "8px 32px",
+							}}
+						>
+							0x6b419b3226c00c7fa0Aebe9b933A097a11F43C7d
+						</Typography>
+					</Grid>
+                    <Grid
+						style={{
+							width: "100%",
+							display: "flex",
+							// justifyContent: "center",
+						}}
+					>
+						<Typography
+							style={{
+								fontSize: 16,
+								marginBottom: 48,
+							}}
+						>
+							Alternatively, connect your wallet to complete the payment
+						</Typography>
+					</Grid>
 				</Grid>
 			</Grid>
 		</div>
